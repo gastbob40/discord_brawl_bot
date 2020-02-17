@@ -31,3 +31,19 @@ class PermissionsManager:
             yaml.dump(permissions, outfile, default_flow_style=False, allow_unicode=True)
 
         return True
+
+    @staticmethod
+    def remove_perm(perm_name: str, role_id: int) -> bool:
+        with open('src/_data/permissions.yml', 'r') as file:
+            permissions = yaml.safe_load(file)
+
+        if perm_name not in permissions:
+            raise Exception(f'{perm_name} not found in configuration file')
+
+        permissions[perm_name].remove(role_id)
+
+        with open('src/_data/permissions.yml', 'w', encoding='utf8') as outfile:
+            yaml.dump(permissions, outfile, default_flow_style=False, allow_unicode=True)
+
+        return True
+
