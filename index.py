@@ -33,8 +33,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message: discord.Message):
-    # await EventsHandler.on_message(client, message)
-    pass
+    await EventsHandler.on_message(client, message)
 
 
 @client.event

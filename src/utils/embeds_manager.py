@@ -5,13 +5,12 @@ import discord
 
 class EmbedsManager:
     @staticmethod
-    def complete_embed(title, content=None):
+    def complete_embed(content):
         embed = discord.Embed(color=0x19D773) \
             .set_author(icon_url="https://cdn0.iconfinder.com/data/icons/shift-free/32/Complete_Symbol-512.png",
-                        name=title)
+                        name="The command was successful.")
         embed.timestamp = datetime.now() - timedelta(hours=1)
-        if content:
-            embed.description = content
+        embed.description = content
         return embed
 
     @staticmethod

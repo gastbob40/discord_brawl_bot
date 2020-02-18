@@ -69,7 +69,9 @@ class OnMessage:
         # Reason management
         elif command == 'reason_list':
             await get_reasons_list(client, message)
-        elif command == 'reason_add':
+
+        return
+        if command == 'reason_add':
             await add_reason(client, message, args)
         elif command == 'reason_remove':
             await remove_reason(client, message, args)
