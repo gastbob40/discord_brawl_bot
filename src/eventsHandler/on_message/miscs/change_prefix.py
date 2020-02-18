@@ -21,7 +21,7 @@ async def change_prefix(client: discord.Client, message: discord.Message, args: 
     if args and args[0] == '-h':
         return await message.channel.send(
             embed=EmbedsManager.information_embed(
-                "Rappel de la commande de changement de préfix : \n"
+                "Rappel de la commande : \n"
                 f"`{config['prefix']}prefix <nouveau prefix>`"
             )
         )
