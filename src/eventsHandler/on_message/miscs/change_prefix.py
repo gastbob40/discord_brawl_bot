@@ -11,22 +11,20 @@ async def change_prefix(client: discord.Client, message: discord.Message, args: 
 
     # Check permissions
     if not PermissionsManager.has_perm(message.author, 'prefix'):
-        await message.channel.send(
+        return await message.channel.send(
             embed=EmbedsManager.error_embed(
                 "Vous n'avez pas les permissions pour cette commande."
             )
         )
-        return
 
     # Help message
     if args and args[0] == '-h':
-        await message.channel.send(
+        return await message.channel.send(
             embed=EmbedsManager.information_embed(
                 "Rappel de la commande de changement de préfix : \n"
                 f"`{config['prefix']}prefix <nouveau prefix>`"
             )
         )
-        return
 
     # Check input
     if len(args) != 1:
