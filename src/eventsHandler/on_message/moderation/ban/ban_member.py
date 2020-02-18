@@ -30,7 +30,7 @@ async def ban_member(client: discord.Client, message: discord.Message, args: Lis
 
     # Check inputs
     if len(message.mentions) != 1:
-        return message.channel.send(
+        return await message.channel.send(
             embed=EmbedsManager.error_embed(
                 ":x: Erreur dans la commande. Merci de mentionner un utilisateur."
             )
@@ -39,7 +39,7 @@ async def ban_member(client: discord.Client, message: discord.Message, args: Lis
     args = args[1:]
 
     if len(args) < 2:
-        return message.channel.send(
+        return await message.channel.send(
             embed=EmbedsManager.error_embed(
                 ":x: Erreur dans la commande. Merci de mettre une raison."
             )

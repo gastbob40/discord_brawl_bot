@@ -30,14 +30,14 @@ async def revoke_ban(client: discord.Client, message: discord.Message, args: Lis
 
     # Check inputs
     if len(args) != 1:
-        return message.channel.send(
+        return await message.channel.send(
             embed=EmbedsManager.error_embed(
                 ":x: Erreur dans la commande, merci de spécifier l'index du ban."
             )
         )
 
     if not args[0].startswith("b"):
-        return message.channel.send(
+        return await message.channel.send(
             embed=EmbedsManager.error_embed(
                 ":x: Erreur, index invalide."
             )
@@ -48,14 +48,14 @@ async def revoke_ban(client: discord.Client, message: discord.Message, args: Lis
     current_ban: Ban = session.query(Ban).filter_by(id=index).first()
 
     if current_ban is None:
-        return message.channel.send(
+        return await message.channel.send(
             embed=EmbedsManager.error_embed(
                 ":x: Erreur, index invalide."
             )
         )
 
     if not current_ban.is_active:
-        return message.channel.send(
+        return await message.channel.send(
             embed=EmbedsManager.error_embed(
                 ":x: Erreur, ce bannissement est déjà révoqué."
             )

@@ -74,7 +74,6 @@ class OnMessage:
         elif command == 'reason_remove':
             await remove_reason(client, message, args)
 
-        return
         # Ban management
         if command == 'ban':
             await ban_member(client, message, args)
@@ -87,8 +86,9 @@ class OnMessage:
         elif command == 'rkick':
             await revoke_kick(client, message, args)
 
+        return
         # Warn management
-        elif command == 'warn':
+        if command == 'warn':
             await warn_member(client, message, args)
         elif command == 'rwarn':
             await revoke_warn(client, message, args)

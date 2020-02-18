@@ -30,7 +30,7 @@ async def remove_reason(client: discord.Client, message: discord.Message, args: 
 
     # Check inputs
     if len(args) != 1:
-        return message.channel.send(
+        return await message.channel.send(
             embed=EmbedsManager.error_embed(
                 ":x: Merci de mettre le numéro de la raison à retirer."
             )
@@ -43,7 +43,7 @@ async def remove_reason(client: discord.Client, message: discord.Message, args: 
     index = int(args[0]) - 1
 
     if index >= len(reasons):
-        return message.channel.send(
+        return await message.channel.send(
             embed=EmbedsManager.error_embed(
                 ":x: Merci de mettre un index valide."
             )
