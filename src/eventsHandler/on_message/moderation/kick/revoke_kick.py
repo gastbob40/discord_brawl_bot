@@ -43,18 +43,29 @@ async def revoke_kick(client: discord.Client, message: discord.Message, args: Li
             )
         )
 
+    # Process code
     index = int(args[0][1:])
     current_kick: Kick = session.query(Kick).filter_by(id=index).first()
 
     if current_kick is None:
-        await message.channel.send(f":x: Erreur, index invalide.")
-        return
+        return await message.channel.send(
+            embed=EmbedsManager.error_embed(
+                ":x: Erreur, index invalide."
+            )
+        )
 
     if not current_kick.is_active:
-        await message.channel.send(f":x: Erreur, cet avertissement est déjà révoqué.")
-        return
+        return await message.channel.send(
+            embed=EmbedsManager.error_embed(
+                ":x: Erreur, cet avertissement est déjà révoqué."
+            )
+        )
 
     current_kick.is_active = False
     session.commit()
 
-    await message.channel.send(f"👢 L'expulsion **{args[0]}** a été révoqué.")
+    await message.channel.send(
+        embed=EmbedsManager.complete_embed(
+            f"👢 L'expulsion **{args[0]}** a été révoqué."
+        )
+    )
