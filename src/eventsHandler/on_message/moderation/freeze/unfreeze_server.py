@@ -25,7 +25,7 @@ async def unfreeze_server(client: discord.Client, message: discord.Message, args
         return await message.channel.send(
             embed=EmbedsManager.information_embed(
                 "Rappel de la commande : \n"
-                f"`{config['prefix']}unfreeze`"
+                f"`{config['prefix']}rfreeze`"
             )
         )
 
