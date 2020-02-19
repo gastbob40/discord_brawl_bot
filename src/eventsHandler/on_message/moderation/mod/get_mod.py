@@ -2,20 +2,32 @@ from datetime import datetime, timedelta
 from typing import List
 
 import discord
+import yaml
 
 from src.models.models import session, Kick, Warn, Ban, Mute
+from src.utils.embeds_manager import EmbedsManager
 
 
 async def get_mod(client: discord.Client, message: discord.Message, args: List[str]):
-    if not message.author.guild_permissions.kick_members:
-        await message.channel.send(f":x: Vous n'avez pas les permissions pour cette commande.")
-        return
+    with open('run/config/config.yml', 'r') as file:
+        config = yaml.safe_load(file)
 
-    # Check parameters
-    # ?mod @pseudo
+    # Help message
+    if args and args[0] == '-h':
+        return await message.channel.send(
+            embed=EmbedsManager.information_embed(
+                "Rappel de la commande : \n"
+                f"`{config['prefix']}mod <@user>`"
+            )
+        )
+
+    # Check inputs
     if len(message.mentions) != 1:
-        await message.channel.send(f":x: Erreur dans la commande. Merci de mentionner un utilisateur.")
-        return
+        return await message.channel.send(
+            embed=EmbedsManager.error_embed(
+                ":x: Erreur dans la commande. Merci de mentionner un utilisateur."
+            )
+        )
 
     target: discord.Member = message.mentions[0]
 
