@@ -86,9 +86,8 @@ class OnMessage:
         elif command == 'rkick':
             await revoke_kick(client, message, args)
 
-        return
         # Warn management
-        if command == 'warn':
+        elif command == 'warn':
             await warn_member(client, message, args)
         elif command == 'rwarn':
             await revoke_warn(client, message, args)
@@ -107,7 +106,7 @@ class OnMessage:
         elif command == "annonce":
             await annonce_msg(client, message, args)
 
-        # Free management
+        # Freeze management
         elif command == "freeze":
             await freeze_server(client, message, args)
         elif command == "rfreeze":
