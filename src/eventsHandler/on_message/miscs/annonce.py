@@ -38,10 +38,12 @@ async def annonce_msg(client: discord.Client, message: discord.Message, args: Li
     content = ' '.join(args[1:])
 
     try:
-        await channel.send(content)
+        await channel.send(
+            embed=EmbedsManager.complete_embed(content)
+        )
         await message.channel.send(
             embed=EmbedsManager.complete_embed(
-                f"Le message a bien été envoyé dans {channel} : \n ```{content}```"
+                f"Le message a bien été envoyé dans {channel} : \n {content}"
             )
         )
     except:
