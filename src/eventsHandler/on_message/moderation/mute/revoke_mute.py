@@ -11,7 +11,7 @@ async def revoke_mute(client: discord.Client, message: discord.Message, args: Li
     with open('run/config/config.yml', 'r') as file:
         config = yaml.safe_load(file)
 
-    if not PermissionsManager.has_perm(message.author, 'manage_reason'):
+    if not PermissionsManager.has_perm(message.author, 'mute'):
         return await message.channel.send(
             embed=EmbedsManager.error_embed(
                 "Vous n'avez pas les permissions pour cette commande."

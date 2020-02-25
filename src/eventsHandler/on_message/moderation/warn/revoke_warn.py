@@ -12,7 +12,7 @@ async def revoke_warn(client: discord.Client, message: discord.Message, args: Li
         config = yaml.safe_load(file)
 
     # Check permissions
-    if not PermissionsManager.has_perm(message.author, 'manage_reason'):
+    if not PermissionsManager.has_perm(message.author, 'warn'):
         return await message.channel.send(
             embed=EmbedsManager.error_embed(
                 "Vous n'avez pas les permissions pour cette commande."
