@@ -3,6 +3,7 @@ import yaml
 from typing import List
 
 # Import from databse
+from src.eventsHandler.on_message.administration.permissions import permissions
 from src.models.models import session, CustomCommand
 
 # Prefix manipulation
@@ -119,3 +120,6 @@ class OnMessage:
             await remove_customcommands(client, message, args)
         elif command == "list_command":
             await list_customcommands(client, message, args)
+
+        elif command == 'perm':
+            await permissions(client, message, args)
