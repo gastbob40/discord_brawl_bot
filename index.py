@@ -15,20 +15,20 @@ client = discord.Client()
 async def on_ready():
     await EventsHandler.on_ready(client)
 
-    with open('run/data/reactions.yml', 'r') as file:
-        reactions = yaml.safe_load(file)
+    # #ith open('run/data/reactions.yml', 'r') as file:
+    #   reactions = yaml.safe_load(file)
 
-    for reaction in reactions:
-        message = await client. \
-            get_channel(reaction['channel_id']). \
-            fetch_message(reaction['message_id'])
-        for r in reaction['reactions']:
-            emoji = [
-                x for x in client.emojis
-                if str(x) == r['emoji_id']
-            ]
-            if emoji:
-                await message.add_reaction(emoji[0])
+    # for reaction in reactions:
+    #    message = await client. \
+    #        get_channel(reaction['channel_id']). \
+    #        fetch_message(reaction['message_id'])
+    #    for r in reaction['reactions']:
+    #        emoji = [
+    #            x for x in client.emojis
+    #            if str(x) == r['emoji_id']
+    #        ]
+    #        if emoji:
+    #            await message.add_reaction(emoji[0])
 
 
 @client.event
