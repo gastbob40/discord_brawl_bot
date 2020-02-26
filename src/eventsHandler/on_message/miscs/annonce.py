@@ -24,7 +24,9 @@ async def annonce_msg(client: discord.Client, message: discord.Message, args: Li
         return await message.channel.send(
             embed=EmbedsManager.information_embed(
                 "Rappel de la commande : \n"
-                f"`{config['prefix']}annonce <#channel> <reason>`"
+                f"`{config['prefix']}annonce <#channel> <couleur> <contenue>`\n"
+                f"La couleur doit etre au format hexadécimale (FFFFFF) sans le #."
+                f" Une image peut etre ajouté à la commande."
             )
         )
 
@@ -35,10 +37,44 @@ async def annonce_msg(client: discord.Client, message: discord.Message, args: Li
             )
         )
 
+    # Get channel
     channel: discord.TextChannel = message.channel_mentions[0]
-    content = ' '.join(args[1:])
-    embed = discord.Embed(color=0x19D773)
+    args.pop(0)
+
+    # Get color
+    if not args:
+        return await message.channel.send(
+            embed=EmbedsManager.error_embed(
+                f":x: Erreur dans la commande. Merci de specifier une couleur valide."
+            )
+        )
+
+    try:
+        color = int(args.pop(0), 16)
+    except:
+        return await message.channel.send(
+            embed=EmbedsManager.error_embed(
+                f":x: Erreur dans la commande. Merci de specifier une couleur valide."
+            )
+        )
+
+    # Get content
+    if not args:
+        return await message.channel.send(
+            embed=EmbedsManager.error_embed(
+                f":x: Erreur dans la commande. Merci de specifier un contenue valide."
+            )
+        )
+
+    content = ' '.join(args)
+    embed = discord.Embed(color=color)
     embed.description = content
+
+    # Get image
+    if message.attachments:
+        embed.set_image(
+            url=message.attachments[0].url
+        )
 
     try:
         await channel.send(
