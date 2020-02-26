@@ -62,6 +62,7 @@ class OnMessage:
         custom_commands: List[CustomCommand] = session.query(CustomCommand).filter_by(command=command).all()
 
         if len(custom_commands) == 1:
+            await message.delete()
             await message.channel.send(custom_commands[0].content)
 
         elif command == 'prefix':
