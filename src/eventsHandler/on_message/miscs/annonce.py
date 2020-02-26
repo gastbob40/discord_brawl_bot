@@ -1,4 +1,5 @@
 from typing import List
+
 import discord
 import yaml
 
@@ -36,10 +37,12 @@ async def annonce_msg(client: discord.Client, message: discord.Message, args: Li
 
     channel: discord.TextChannel = message.channel_mentions[0]
     content = ' '.join(args[1:])
+    embed = discord.Embed(color=0x19D773)
+    embed.description = content
 
     try:
         await channel.send(
-            embed=EmbedsManager.complete_embed(content)
+            embed=embed
         )
         await message.channel.send(
             embed=EmbedsManager.complete_embed(
