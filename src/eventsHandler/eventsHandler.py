@@ -16,5 +16,6 @@ class EventsHandler:
 
     @staticmethod
     async def on_reaction_add(client: discord.client, reaction: discord.Reaction, user: discord.User):
-        await OnReactionAdd.check_reaction(client, reaction, user)
+        # await OnReactionAdd.check_reaction(client, reaction, user)
+        pass
 
